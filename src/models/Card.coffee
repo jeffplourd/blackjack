@@ -1,3 +1,6 @@
+#this file is creating a card model and setting four properties
+#revealed, value, suitName, and rankName
+
 class window.Card extends Backbone.Model
   initialize: (params) ->
     @set
