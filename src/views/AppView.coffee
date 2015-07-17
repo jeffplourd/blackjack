@@ -33,6 +33,17 @@ class window.AppView extends Backbone.View
           #invoke alert with 'dealer wins'
           alert('dealer wins!')
 
+        #clear the dealer and player's hands
+        @model.get('playerHand').resetHand()
+        @model.get('dealerHand').resetHand()
+
+        #deal new cards to player and dealer
+        @model.get('playerHand').dealPlayerHand()
+        @model.get('dealerHand').dealDealerHand()
+
+
+        #deal a new set of cards
+
     'click .stand-button': ->
       @model.get('dealerHand').showDealersHand()
       #copy logic from 'hit' button inside if statement
@@ -47,6 +58,14 @@ class window.AppView extends Backbone.View
       else
         #invoke alert with 'dealer wins'
         alert('dealer wins!')
+
+      #clear the dealer and player's hands
+      @model.get('playerHand').resetHand()
+      @model.get('dealerHand').resetHand()
+
+      #deal new cards to player and dealer
+      @model.get('playerHand').dealPlayerHand()
+      @model.get('dealerHand').dealDealerHand()
 
   initialize: ->
     @render()

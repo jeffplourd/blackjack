@@ -25,6 +25,18 @@ class window.Hand extends Backbone.Collection
     else
       return false   
 
+  resetHand: ->
+    @reset()
+
+  dealPlayerHand: ->
+    @add(@deck.pop())
+    @add(@deck.pop())
+
+  dealDealerHand: ->
+    @add(@deck.pop())
+    @add(@deck.pop())
+    @at(0).flip()
+
   showDealersHand: ->
     #flips over the dealers card
     @.at(0).flip() 
