@@ -20,18 +20,8 @@ class window.AppView extends Backbone.View
       #if checkIfDone is true, runShowresults
       if @model.get('playerHand').checkIfDone()
         @model.get('dealerHand').showDealersHand()
-        @model.get('playerHand').showResults()
-        #this is returning the player's best score and saves it in 'p'
-        p = `this.model.get('playerHand').scores().reduce(function(best,cur){if(Math.abs(21-best) < Math.abs(21-cur) && best < 22){return best;}else if(cur < 22){return cur;}else {return false}})`        
-        #gets the dealers best score and saves it in 'd'
-        d = `this.model.get('dealerHand').scores().reduce(function(best,cur){if(Math.abs(21-best) < Math.abs(21-cur)){return best;}else{return cur;}})`
-        #if player's best score is greater than or equal to dealers best score
-        if p >= d 
-          #invoke alert with 'player wins'
-          alert('player wins!')
-        else
-          #invoke alert with 'dealer wins'
-          alert('dealer wins!')
+        #if the playerHand is greater than 21 then the dealer wins
+        alert('dealer wins!')
 
         #clear the dealer and player's hands
         @model.get('playerHand').resetHand()
@@ -46,19 +36,22 @@ class window.AppView extends Backbone.View
 
     'click .stand-button': ->
       @model.get('dealerHand').showDealersHand()
-      #copy logic from 'hit' button inside if statement
-      #this is returning the player's best score and saves it in 'p'
-      p = `this.model.get('playerHand').scores().reduce(function(best,cur){if(Math.abs(21-best) < Math.abs(21-cur) && best < 22){return best;}else if(cur < 22){return cur;}else {return false}})`        
-      #gets the dealers best score and saves it in 'd'
-      d = `this.model.get('dealerHand').scores().reduce(function(best,cur){if(Math.abs(21-best) < Math.abs(21-cur)){return best;}else{return cur;}})`
-      #if player's best score is greater than or equal to dealers best score
-      if p >= d 
-        #invoke alert with 'player wins'
-        alert('player wins!')
-      else
-        #invoke alert with 'dealer wins'
-        alert('dealer wins!')
+      #while dealer's hand is less than 17, hit dealer. i should be able to do this as a Hand method
+      @model.get('dealerHand').hit()
 
+      #compare the value of each hand and assign and alert the winner
+      if @model.get('playerHand').scores()[0] == @model.get('playerHand').scores()[1]
+        p = @model.get('playerHand').scores()[0]
+      else
+        p = @model.get('playerHand').checkAceScore()
+
+      if @model.get('dealerHand').scores()[0] == @model.get('dealerHand').scores()[1]
+        d = @model.get('dealerHand').scores()[0]
+      else
+        d = @model.get('dealerHand').checkAceScore()
+
+      if p >= d then alert('player wins!') else alert('dealer wins!')
+      
       #clear the dealer and player's hands
       @model.get('playerHand').resetHand()
       @model.get('dealerHand').resetHand()

@@ -1,5 +1,6 @@
 #this file is creating a card model and setting four properties
 #revealed, value, suitName, and rankName
+#the card model also has a 'flip' method the just toggles the current card
 
 class window.Card extends Backbone.Model
   initialize: (params) ->

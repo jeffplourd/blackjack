@@ -8,6 +8,8 @@ OBJECTIVES:
 
 TODO:
   -add a 'stand' function to 'Hand' collection
+  -make a 'check if done' method to be called when the stand or hit buttons are pressed
+  -
 
 ###
 
